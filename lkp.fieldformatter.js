@@ -71,7 +71,7 @@
 				before = this.value.substring(0,current.start),
 				after = this.value.substring(current.end,this.value.length);
 			/* With Delete / Suprr hit with no selection length need offest to be forced */
-			if(!current.length){
+			if(!current.length && e){
 				if(e.keyCode == 8) before = before.substring(0,before.length-1);
 				if(e.keyCode == 46) after = after.substring(1);
 			};
@@ -82,7 +82,7 @@
 		format = function(e){
 
 			/* Prevent format to be performed with specified keys */
-			if(noActionKeys.indexOf(e.keyCode) != -1 || e.ctrlKey && e.keyCode == '65') return;
+			if(e && noActionKeys.indexOf(e.keyCode) != -1 || e && e.ctrlKey && e.keyCode == '65') return;
 			
 			/* Vars */
 			var pattern = this.getAttribute('data-format'),
@@ -124,7 +124,18 @@
 				doc.getElementById(sync).value = clearString.call(this,this.value);
 			};
 		};
-
+	
+	/* Init */
+	var inputs = doc.querySelectorAll('input[data-format]'),
+		i = 0;
+	while(inputs[i]){
+		setSelectionState.call(inputs[i]);
+		format.call(inputs[i]);
+		sync.call(inputs[i]);
+		i++;
+	};
+	
+	
 	/* Event */
 	if(doc.addEventListener){
 		doc.addEventListener('keydown',function(e){ eventProxy(e,setSelectionState); },false);
