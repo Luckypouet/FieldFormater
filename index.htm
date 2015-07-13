@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		
+		<meta charset="UTF-8" />
+		<title>Auto format</title>
+		<style>
+			input[type="text"]{ margin:0.25em 0; padding:0 0.25em; line-height:2em; width:50%; }
+		</style>
+
+	</head>
+	<body>
+
+		<h1>Auto formater</h1>
+		
+		<hr />
+		
+		<fieldset>
+			<legend>With selectionSplit</legend>
+			<input id="back2" type="text" /><br />
+			<input id="front2" type="text" name="iban" data-sync="back2" data-format="####  ####  ####  ####  ####  ####  ###" /><br />
+			<input id="text" type="text" name="date" data-format="##/##/####" /><br />
+		
+		</fieldset>
+		
+		<script src="lkp.fieldformatter.js"></script>
+	
+	</body>
+</html>
