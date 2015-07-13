@@ -85,7 +85,7 @@
 			if(noActionKeys.indexOf(e.keyCode) != -1 || e.ctrlKey && e.keyCode == '65') return;
 			
 			/* Vars */
-			var format = this.getAttribute('data-format'),
+			var pattern = this.getAttribute('data-format'),
 				split = this.value.replace(splitterReg,'$1'+phChar+'$2'+phChar+'$3').split(phChar),
 				seps = getSeps.call(this).join('|'),
 				remover = new RegExp('('+seps+')*$','gi'),
@@ -98,7 +98,7 @@
 				caretPos = (!before.length && !middle.length)? 0 : null;
 			
 			/* Build */
-			output = format.replace(phReg,function(match,number){
+			output = pattern.replace(phReg,function(match,number){
 				/* Pick first char from the three arrays before, middle and then after. In that order to fill the format pattern */
 				var next = before.shift() || middle.shift() || after.shift() || '';
 				if(!before.length && !middle.length && caretPos == null){
